@@ -17,4 +17,3 @@ render(
   </Provider>,
   rootElement
 );
-console.log('I am alive!');

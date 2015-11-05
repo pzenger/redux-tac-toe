@@ -10,7 +10,6 @@ class Footer extends Component {
     );
   }
   handleClick() {
-    console.log('footer handle click');
     this.props.onResetClick();
   }
 }

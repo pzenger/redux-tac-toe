@@ -20,9 +20,6 @@ export class Game extends Component {
       'game-over': this.props.winner
     });
 
-    console.log('TOPCLASS')
-    console.log(topClass);
-
     return (
       <div className="App">
         <Header
@@ -62,8 +59,6 @@ Game.propTypes = {
 
 // or select
 function mapStateToProps(state) {
-  console.log('STATE');
-  console.log(state);
   return {
     turn: state.reducer.get('turn'),
     board: state.reducer.get('board'),
@@ -72,5 +67,4 @@ function mapStateToProps(state) {
   };
 }
 
-console.log('Game connect');
 export const GameContainer = connect(mapStateToProps)(Game);
