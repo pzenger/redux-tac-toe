@@ -7,19 +7,13 @@ export const INITIAL_STATE = fromJS({
     [0,0,0]
   ],
   turn: 'x',
-  winner: null
+  winner: null,
+  draw: false
 });
 
 export function move(state, position) {
   const board = state.get('board');
   const turn = state.get('turn');
-  const winner = state.get('winner');
-
-  if(winner){
-    return state;
-  }
-
-  const col = board.get(position.x);
 
   if(board.get(position.x).get(position.y) === 0){
     const newBoard = board.setIn([position.x, position.y], turn);
@@ -32,6 +26,16 @@ export function move(state, position) {
         winner: turn
       });
     }
+
+    let draw = checkDraw(newBoard);
+    if(draw){
+      return state.merge({
+        board: newBoard,
+        turn: turn === 'x' ? 'o': 'x',
+        draw: true
+      });
+    }
+
     return state.merge({
       board: newBoard,
       turn: turn === 'x' ? 'o': 'x'
@@ -45,7 +49,7 @@ export function reset(state) {
 }
 
 function checkWin(board, turn) {
-  
+
   const winningPoints = [
     [{x:0,y:0},{x:1,y:0},{x:2,y:0}],
     [{x:0,y:1},{x:1,y:1},{x:2,y:1}],
@@ -64,4 +68,13 @@ function checkWin(board, turn) {
   }).indexOf(true);
 
   return winPost >= 0;
+}
+
+function checkDraw(board) {
+  return board.every(row => {
+    return row.every(col => {
+      return col !== 0;
+    });
+  });
+
 }

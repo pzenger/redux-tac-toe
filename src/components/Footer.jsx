@@ -5,7 +5,7 @@ class Footer extends Component {
   render() {
     return (
       <div className="Footer">
-        <button onClick={() => this.handleClick()}> Reset </button>
+        <button onClick={() => this.handleClick()}>Reset</button>
       </div>
     );
   }

@@ -8,14 +8,14 @@ import {INITIAL_STATE} from '../src/core';
 describe('reducer', () => {
   it('handles MOVE', () => {
     const initialState = fromJS({
-      board:[[0]],
+      board:[[0, 0]],
       turn: 'x'
     });
     const action = {type: 'MOVE', position: {x: 0, y: 0}};
     const nextState = reducer(initialState, action);
 
     expect(nextState).to.equal(fromJS({
-      board:[['x']],
+      board:[['x', 0]],
       turn:'o'
     }));
   });

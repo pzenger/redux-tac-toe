@@ -21,13 +21,13 @@ describe('application logic', () => {
 
     it('does not overwrite old moves', () => {
       const initialState = fromJS({
-        board: [['o']],
+        board: [['o', 0]],
         turn: 'x'
       });
       const nextState = move(initialState, {x:0, y:0});
 
       expect(nextState).to.equal(fromJS({
-        board: [['o']],
+        board: [['o', 0]],
         turn: 'x'
       }));
 
@@ -35,13 +35,13 @@ describe('application logic', () => {
 
     it('changes turn on a successful move', () => {
       const initialState = fromJS({
-        board: [[0]],
+        board: [[0, 0]],
         turn: 'x'
       });
       const nextState = move(initialState, {x:0, y:0});
 
       expect(nextState).to.equal(fromJS({
-        board: [['x']],
+        board: [['x', 0]],
         turn: 'o'
       }));
     });
@@ -87,7 +87,23 @@ describe('application logic', () => {
       turn: 'x',
       winner: 'x'
     }));
+
   });
+
+  it('sets draw once the board is full and there is no win', () => {
+    const initialState = fromJS({
+      board: [['x','o','x'],['x','o','x'],['o','x',0]],
+      turn: 'o'
+    });
+    const nextState = move(initialState, {x:2, y:2});
+
+    expect(nextState).to.equal(fromJS({
+      board: [['x','o','x'],['x','o','x'],['o','x','o']],
+      turn: 'x',
+      draw: true
+    }));
+  });
+
 });
 
   describe('reset', () => {
