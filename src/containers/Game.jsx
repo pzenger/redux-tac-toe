@@ -2,17 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { move, reset } from '../actions';
+import classNames from 'classnames';
 
 import Header from '../components/Header';
 import Board from '../components/Board';
 import Footer from '../components/Footer';
 import Winner from '../components/Winner';
 import Draw from '../components/Draw';
+import SiteFooter from '../components/SiteFooter';
 
 export class Game extends Component {
   render() {
     // Injected by connect() call
     const { dispatch, board, turn} = this.props;
+
+    const topClass = classNames({
+      'game-over': this.props.winner
+    });
+
+    console.log('TOPCLASS')
+    console.log(topClass);
+
     return (
       <div className="App">
         <Header
@@ -22,6 +32,7 @@ export class Game extends Component {
         {this.props.draw ?
           <Draw /> : null }
           <Board
+            className={topClass}
             board={board}
             onCellClick={(x,y) =>
               dispatch(move({x, y}))
@@ -30,6 +41,8 @@ export class Game extends Component {
         <Footer onResetClick={() =>
             dispatch(reset())
           } />
+
+        <SiteFooter />
       </div>
     );
   }

@@ -5,7 +5,7 @@ import Cell from './Cell';
 class Board extends Component {
   render() {
     return (
-        <div className="Board">
+        <div className={this.props.className + " Board"}>
         {this.props.board.map((row, x) =>
           row.map((col, y) =>
               <Cell value={String(col)} position={{x,y}} onCellClick={this.props.onCellClick} />

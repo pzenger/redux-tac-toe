@@ -14,6 +14,12 @@ export const INITIAL_STATE = fromJS({
 export function move(state, position) {
   const board = state.get('board');
   const turn = state.get('turn');
+  const winner = state.get('winner');
+  const draw = state.get('draw');
+
+  if(winner || draw) {
+    return state;
+  }
 
   if(board.get(position.x).get(position.y) === 0){
     const newBoard = board.setIn([position.x, position.y], turn);

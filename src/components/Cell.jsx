@@ -4,9 +4,6 @@ import classNames from 'classnames';
 class Cell extends Component {
 
   render(){
-
-    console.log(typeof(this.props.value));
-
     let squareClass = classNames('Cell',{
       'empty': this.props.value === '0',
       'x': this.props.value === 'x',
