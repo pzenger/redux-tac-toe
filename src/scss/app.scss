@@ -8,19 +8,15 @@ $clear: hsla(0,0,0,0);
 body {
   background-color: $background-color;
   font-family: sans-serif;
-  // color: $reset-color;
 }
 
 .Board {
   margin: 0 auto;
   width: 300px;
-  // background-color: hsla(90, 60, 55, 0.0);
 }
 
 .Cell {
-  // border: 1px solid hsla(0, 0, 80, 1.0);
   display: inline-block;
-  // padding: 5px 5px;
   height: 86px;
   margin: 5px 5px;
   padding: 0;
@@ -39,8 +35,6 @@ body {
 
 .x {
   position: relative;
-  // background-color: $x-color;
-  // color: hsla(0,0,100,1);
   color: $x-color;
   border: 2px solid $x-color;
 
@@ -59,10 +53,8 @@ body {
 
 .o {
   position: relative;
-  // background-color: $o-color;
   color: $o-color;
   border: 2px solid $o-color;
-  // color: hsla(0,0,100,1);
 
   &:after {
     display: inline-block;
@@ -93,7 +85,6 @@ body {
   button {
     display: block;
     margin: 0 auto;
-    // padding: 2.5% 15%;
     width: 300px;
     height: 120px;
     font-size: 48px;
@@ -102,6 +93,7 @@ body {
     background-color: $clear;
     border: 2px solid $reset-color;
     color: $reset-color;
+    text-transform: uppercase;
 
     &:hover {
       background-color: darken($reset-color, 10%);
@@ -114,4 +106,27 @@ body {
     outline: none
   }
 
+}
+
+.Winner {
+  position: absolute;
+  // left: 5%;
+  left: 0;
+  top: 263px;
+  height: 75px;
+  padding-top: 45px;
+  width: 100%;
+  background-color: hsla(255,255,255,0.3);
+  z-index: 2;
+  // margin-left:0;
+  // padding-left:0;
+
+  h1{
+    position: relative;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    color: darken($empty-color, 70%);
+    text-transform: uppercase;
+  }
 }

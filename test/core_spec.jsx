@@ -46,7 +46,49 @@ describe('application logic', () => {
       }));
     });
 
+
+  it('win condition - horizontal', () => {
+    const initialState = fromJS({
+      board:[[0,0,0],['x','x',0], [0,0,0]],
+      turn: 'x'
+    });
+    const nextState = move(initialState, {x:1, y:2});
+
+    expect(nextState).to.equal(fromJS({
+      board:[[0,0,0],['x','x','x'],[0,0,0]],
+      turn: 'x',
+      winner: 'x'
+    }));
   });
+
+  it('win condition - vertical', () => {
+    const initialState = fromJS({
+      board:[[0,'x',0],[0,'x',0], [0,0,0]],
+      turn: 'x'
+    });
+    const nextState = move(initialState, {x:2, y:1});
+
+    expect(nextState).to.equal(fromJS({
+      board:[[0,'x',0],[0,'x',0],[0,'x',0]],
+      turn: 'x',
+      winner: 'x'
+    }));
+  });
+
+  it('win condition - diagonal', () => {
+    const initialState = fromJS({
+      board:[['x',0,0],[0,'x',0], [0,0,0]],
+      turn: 'x'
+    });
+    const nextState = move(initialState, {x:2, y:2});
+
+    expect(nextState).to.equal(fromJS({
+      board:[['x',0,0],[0,'x',0],[0,0,'x']],
+      turn: 'x',
+      winner: 'x'
+    }));
+  });
+});
 
   describe('reset', () => {
     it('resets board to INTITIAL_STATE', () => {

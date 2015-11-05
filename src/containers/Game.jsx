@@ -6,6 +6,7 @@ import { move, reset } from '../actions';
 import Header from '../components/Header';
 import Board from '../components/Board';
 import Footer from '../components/Footer';
+import Winner from '../components/Winner';
 
 export class Game extends Component {
   render() {
@@ -15,11 +16,15 @@ export class Game extends Component {
       <div className="App">
         <Header
           turn={turn} />
-        <Board
-          board={board}
-          onCellClick={(x,y) =>
-            dispatch(move({x, y}))
-          } />
+        {this.props.winner ?
+          <Winner ref="winner" winner={this.props.winner} /> :
+          <div></div>}
+          <Board
+            board={board}
+            onCellClick={(x,y) =>
+              dispatch(move({x, y}))
+            } />
+        
         <Footer onResetClick={() =>
             dispatch(reset())
           } />
@@ -33,7 +38,11 @@ Game.propTypes = {
     'o',
     'x'
   ]).isRequired,
-  board: ImmutablePropTypes.listOf(ImmutablePropTypes.listOf(PropTypes.any).isRequired).isRequired
+  board: ImmutablePropTypes.listOf(ImmutablePropTypes.listOf(PropTypes.any).isRequired).isRequired,
+  winner: PropTypes.oneOf([
+    'o',
+    'x'
+  ])
 };
 
 // or select
